@@ -147,7 +147,10 @@ resource "aws_iam_role_policy" "master_policy" {
         "s3:ListBucket",
         "s3:PutObject"
       ],
-      "Resource": "arn:${local.arn}:s3:::*",
+      "Resource": [
+        "arn:${local.arn}:s3:::${var.s3_bucket}",
+        "arn:${local.arn}:s3:::${var.s3_bucket}/*",
+      ],
       "Effect": "Allow"
     },
     {
