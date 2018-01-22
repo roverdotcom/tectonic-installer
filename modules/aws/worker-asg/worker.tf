@@ -166,7 +166,7 @@ resource "aws_iam_role_policy" "worker_policy" {
       "Action" : [
         "s3:GetObject"
       ],
-      "Resource": "arn:aws:s3:::*",
+      "Resource": "arn:aws:s3:::${var.s3_bucket}/*",
       "Effect": "Allow"
     },
     {
