@@ -100,6 +100,11 @@ resource "template_dir" "tectonic" {
 
     image_re            = "${var.image_re}"
     kube_dns_service_ip = "${cidrhost(var.service_cidr, 10)}"
+
+    google_oidc_client_id     = "${var.google_oidc_client_id}"
+    google_oidc_client_secret = "${var.google_oidc_client_secret}"
+    google_oidc_redirect_uri  = "${var.google_oidc_redirect_uri}"
+    google_oidc_domain        = "${var.google_oidc_domain}"
   }
 }
 
