@@ -4,6 +4,7 @@ data "ignition_config" "etcd" {
   systemd = [
     "${data.ignition_systemd_unit.locksmithd.*.id[count.index]}",
     "${var.ign_etcd_dropin_id_list[count.index]}",
+    "${data.ignition_systemd_unit.dd_agent.id}",
   ]
 
   files = ["${compact(list(
@@ -12,6 +13,11 @@ data "ignition_config" "etcd" {
    ))}",
     "${var.ign_etcd_crt_id_list}",
     "${var.ign_ntp_dropin_id}",
+    "${data.ignition_file.dd_agent_confd_etcd.id}",
+  ]
+
+  directories = [
+    "${data.ignition_directory.dd_agent_confd_dir.id}",
   ]
 }
 

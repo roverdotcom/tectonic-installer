@@ -11,6 +11,7 @@ data "ignition_config" "main" {
     var.ign_profile_env_id,
     var.ign_s3_puller_id,
     var.ign_systemd_default_env_id,
+    data.ignition_file.resolved_conf_dropin.id,
    ))}",
     "${var.ign_ca_cert_id_list}",
   ]
@@ -30,6 +31,23 @@ data "ignition_config" "main" {
     var.ign_tectonic_service_id,
     var.ign_update_ca_certificates_dropin_id,
    ))}"]
+}
+
+data "aws_region" "current" {
+  current = true
+}
+
+data "ignition_file" "resolved_conf_dropin" {
+  filesystem = "root"
+  path       = "/etc/systemd/resolved.conf.d/10-resolved-conf.conf"
+  mode       = 0644
+
+  content {
+    content = <<EOF
+[Resolve]
+Domains=${data.aws_region.current.name == "us-east-1" ? "ec2.internal" : "${data.aws_region.current.name}.compute.internal"}
+EOF
+  }
 }
 
 data "template_file" "detect_master" {

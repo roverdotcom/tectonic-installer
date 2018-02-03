@@ -116,6 +116,19 @@ module "tectonic" {
   stats_url         = "${var.tectonic_stats_url}"
 
   image_re = "${var.tectonic_image_re}"
+
+  google_oidc_client_id     = "${data.aws_ssm_parameter.google_oidc_client_id.value}"
+  google_oidc_client_secret = "${data.aws_ssm_parameter.google_oidc_client_secret.value}"
+  google_oidc_redirect_uri  = "${var.google_oidc_redirect_uri}"
+  google_oidc_domain        = "${var.google_oidc_domain}"
+}
+
+data "aws_ssm_parameter" "google_oidc_client_id" {
+  name = "${var.google_oidc_client_id_ssm_parameter}"
+}
+
+data "aws_ssm_parameter" "google_oidc_client_secret" {
+  name = "${var.google_oidc_client_secret_ssm_parameter}"
 }
 
 module "flannel_vxlan" {

@@ -345,3 +345,23 @@ Example:
  * `["ingress-nginx"]`
 EOF
 }
+
+variable "google_oidc_client_id_ssm_parameter" {
+  type    = "string"
+  default = "tectonic_google_oidc_client_id"
+}
+
+variable "google_oidc_client_secret_ssm_parameter" {
+  type    = "string"
+  default = "tectonic_google_oidc_client_secret"
+}
+
+variable "google_oidc_redirect_uri" {
+  type    = "string"
+  default = ""
+}
+
+variable "google_oidc_domain" {
+  type    = "string"
+  default = ""
+}
