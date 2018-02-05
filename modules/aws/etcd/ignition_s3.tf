@@ -38,8 +38,8 @@ data "aws_ssm_parameter" "datadog_api_key" {
 }
 
 data "ignition_systemd_unit" "dd_agent" {
-  name    = "dd-agent.service"
-  enabled = true
+  name   = "dd-agent.service"
+  enable = true
 
   content = <<EOF
 [Unit]
