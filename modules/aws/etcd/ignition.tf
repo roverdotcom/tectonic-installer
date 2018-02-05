@@ -11,6 +11,11 @@ data "ignition_config" "etcd" {
     "${data.ignition_file.node_hostname.*.id[count.index]}",
     "${data.ignition_file.etcd_tls_zip.id}",
   ]
+
+  append {
+    source       = "${format("s3://%s/%s", var.s3_bucket, aws_s3_bucket_object.ignition_etcd_rover.key)}"
+    verification = "sha512-${sha512(data.ignition_config.rover.rendered)}"
+  }
 }
 
 data "ignition_file" "node_hostname" {

@@ -80,3 +80,7 @@ variable "tls_zip" {
 variable "ign_etcd_dropin_id_list" {
   type = "list"
 }
+
+variable "s3_bucket" {
+  type = "string"
+}
