@@ -8,7 +8,6 @@ data "ignition_config" "main" {
     var.ign_profile_env_id,
     var.ign_s3_puller_id,
     var.ign_systemd_default_env_id,
-    data.ignition_file.resolved_conf_dropin.id,
    ))}",
     "${var.ign_ca_cert_id_list}",
   ]
