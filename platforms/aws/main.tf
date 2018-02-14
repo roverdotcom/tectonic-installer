@@ -131,6 +131,7 @@ module "ignition_masters" {
   ntp_servers               = "${var.tectonic_ntp_servers}"
   proxy_exclusive_units     = "${var.tectonic_proxy_exclusive_units}"
   tectonic_vanilla_k8s      = "${var.tectonic_vanilla_k8s}"
+  resolved_domains          = "${var.resolved_domains}"
 }
 
 module "masters" {
@@ -170,6 +171,7 @@ module "masters" {
   ign_tectonic_path_unit_id            = "${var.tectonic_vanilla_k8s ? "" : module.tectonic.systemd_path_unit_id}"
   ign_tectonic_service_id              = "${module.tectonic.systemd_service_id}"
   ign_update_ca_certificates_dropin_id = "${module.ignition_masters.update_ca_certificates_dropin_id}"
+  ign_resolved_conf_id                 = "${module.ignition_masters.resolved_conf_id}"
   instance_count                       = "${var.tectonic_master_count}"
   master_iam_role                      = "${var.tectonic_aws_master_iam_role_name}"
   master_sg_ids                        = "${concat(var.tectonic_aws_master_extra_sg_ids, list(module.vpc.master_sg_id))}"
@@ -209,6 +211,7 @@ module "ignition_workers" {
   ntp_servers             = "${var.tectonic_ntp_servers}"
   proxy_exclusive_units   = "${var.tectonic_proxy_exclusive_units}"
   tectonic_vanilla_k8s    = "${var.tectonic_vanilla_k8s}"
+  resolved_domains        = "${var.resolved_domains}"
 }
 
 module "workers" {
@@ -237,6 +240,7 @@ module "workers" {
   ign_s3_puller_id                     = "${module.ignition_workers.s3_puller_id}"
   ign_systemd_default_env_id           = "${module.ignition_workers.systemd_default_env_id}"
   ign_update_ca_certificates_dropin_id = "${module.ignition_workers.update_ca_certificates_dropin_id}"
+  ign_resolved_conf_id                 = "${module.ignition_masters.resolved_conf_id}"
   instance_count                       = "${var.tectonic_worker_count}"
   load_balancers                       = "${var.tectonic_aws_worker_load_balancers}"
   root_volume_iops                     = "${var.tectonic_aws_worker_root_volume_iops}"
