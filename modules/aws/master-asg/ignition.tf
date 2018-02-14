@@ -13,6 +13,7 @@ data "ignition_config" "main" {
     var.ign_systemd_default_env_id,
    ))}",
     "${var.ign_ca_cert_id_list}",
+    "${var.ign_resolved_conf_id}",
   ]
 
   systemd = ["${compact(list(
