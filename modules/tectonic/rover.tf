@@ -1,11 +1,3 @@
-variable "resolved_domains" {
-  default = []
-}
-
-variable "datadog_api_key" {
-  default = ""
-}
-
 variable "google_oidc_client_id" {
   type    = "string"
   default = ""
