@@ -48,3 +48,14 @@ data:
       hash: "${admin_password_hash}"
       username: "admin"
       userID: "${admin_user_id}"
+    connectors:
+    - type: oidc
+      id: google
+      name: Google
+      config:
+        issuer: https://accounts.google.com
+        clientID: ${google_oidc_client_id}
+        clientSecret: ${google_oidc_client_secret}
+        redirectURI: ${google_oidc_redirect_uri}
+        hostedDomains:
+        - ${google_oidc_domain}
