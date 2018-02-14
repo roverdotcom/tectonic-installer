@@ -84,6 +84,7 @@ module "etcd" {
   tls_enabled             = "${var.tectonic_etcd_tls_enabled}"
   tls_zip                 = "${module.etcd_certs.etcd_tls_zip}"
   ign_etcd_dropin_id_list = "${module.ignition_masters.etcd_dropin_id_list}"
+  s3_bucket               = "${aws_s3_bucket.tectonic.bucket}"
 }
 
 module "ignition_masters" {
