@@ -90,6 +90,8 @@ module "etcd" {
   ssh_key                    = "${var.tectonic_aws_ssh_key}"
   subnets                    = "${module.vpc.worker_subnet_ids}"
   tls_enabled                = "${var.tectonic_etcd_tls_enabled}"
+
+  datadog_api_key = "${var.datadog_api_key}"
 }
 
 module "ignition_masters" {
