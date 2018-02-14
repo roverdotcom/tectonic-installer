@@ -57,3 +57,7 @@ variable "ign_nfs_config_id" {
   type        = "string"
   description = "Content of NFS configuration file."
 }
+
+variable "ign_resolved_conf_id" {
+  type = "string"
+}
