@@ -177,3 +177,16 @@ variable "versions" {
   description = "Container versions to use"
   type        = "map"
 }
+
+variable "audit_policy_file" {
+  type        = "string"
+  description = "The audit log policy for the cluster in YAML format."
+
+  default = <<EOF
+# Log all requests at the Metadata level.
+apiVersion: audit.k8s.io/v1beta1
+kind: Policy
+rules:
+- level: Metadata
+EOF
+}
