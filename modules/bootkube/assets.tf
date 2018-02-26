@@ -47,6 +47,7 @@ resource "template_dir" "bootkube" {
     kube_ca_cert       = "${base64encode(var.kube_ca_cert_pem)}"
     apiserver_key      = "${base64encode(var.apiserver_key_pem)}"
     apiserver_cert     = "${base64encode(var.apiserver_cert_pem)}"
+    audit_policy       = "${base64encode(var.audit_policy_file)}"
     serviceaccount_pub = "${base64encode(tls_private_key.service_account.public_key_pem)}"
     serviceaccount_key = "${base64encode(tls_private_key.service_account.private_key_pem)}"
 
