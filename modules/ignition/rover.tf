@@ -20,12 +20,12 @@ EOF
 }
 
 data "ignition_systemd_unit" "kube2iam_iptables" {
-  name    = "kube2iam"
+  name    = "kube2iam-iptables.service"
   enabled = true
 
   content = <<EOF
 [Unit]
-Description=Kube2iam
+Description=To prevent containers from directly accessing the ec2 metadata API and gaining unwanted access to AWS resources, the traffic to 169.254.169.254 must be proxied for docker containers.
 After=network.target
 
 [Service]
