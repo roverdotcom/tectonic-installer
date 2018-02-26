@@ -67,6 +67,8 @@ spec:
         - --audit-log-maxage=30
         - --audit-log-maxbackup=3
         - --audit-log-maxsize=100
+        - --audit-log-format=json
+        - --audit-policy-file=/etc/kubernetes/secrets/audit-policy.yaml
         volumeMounts:
         - mountPath: /etc/ssl/certs
           name: ssl-certs-host
