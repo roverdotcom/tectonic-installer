@@ -243,6 +243,7 @@ module "workers" {
   ign_systemd_default_env_id           = "${module.ignition_workers.systemd_default_env_id}"
   ign_update_ca_certificates_dropin_id = "${module.ignition_workers.update_ca_certificates_dropin_id}"
   ign_resolved_conf_id                 = "${module.ignition_masters.resolved_conf_id}"
+  ign_kube2iam_iptables_id             = "${modules.ignition_workers.kube2iam_iptables_id}"
   instance_count                       = "${var.tectonic_worker_count}"
   load_balancers                       = "${var.tectonic_aws_worker_load_balancers}"
   root_volume_iops                     = "${var.tectonic_aws_worker_root_volume_iops}"
