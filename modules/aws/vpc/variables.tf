@@ -76,3 +76,14 @@ variable "custom_dns_name" {
   default     = ""
   description = "DNS prefix used to construct the console and API server endpoints."
 }
+
+variable "elb_subnet_ids" {
+  description = "Specific subnets for the master ingress elbs."
+  type        = "list"
+  default     = []
+}
+
+variable "elb_ingress_cidr_blocks" {
+  type    = "list"
+  default = ["0.0.0.0/0"]
+}

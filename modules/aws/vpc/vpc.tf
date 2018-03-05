@@ -27,4 +27,5 @@ data "aws_vpc" "cluster_vpc" {
 locals {
   master_subnet_ids = ["${split(",", var.external_vpc_id == "" ? join(",", aws_subnet.master_subnet.*.id) :  join(",", data.aws_subnet.external_master.*.id))}"]
   worker_subnet_ids = ["${split(",", var.external_vpc_id == "" ? join(",", aws_subnet.worker_subnet.*.id) :  join(",", data.aws_subnet.external_worker.*.id))}"]
+  elb_subnet_ids    = ["${split(",", join(",", var.elb_subnet_ids) == "" ? join(",", local.master_subnet_ids) :  join(",", var.elb_subnet_ids))}"]
 }
