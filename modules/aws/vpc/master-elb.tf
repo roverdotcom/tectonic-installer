@@ -1,7 +1,7 @@
 resource "aws_elb" "api_internal" {
   count           = "${var.private_master_endpoints}"
   name            = "${var.cluster_name}-int"
-  subnets         = ["${local.master_subnet_ids}"]
+  subnets         = ["${local.elb_subnet_ids}"]
   internal        = true
   security_groups = ["${aws_security_group.api.id}"]
 
@@ -34,7 +34,7 @@ resource "aws_elb" "api_internal" {
 resource "aws_elb" "api_external" {
   count           = "${var.public_master_endpoints}"
   name            = "${var.custom_dns_name == "" ? var.cluster_name : var.custom_dns_name}-ext"
-  subnets         = ["${local.master_subnet_ids}"]
+  subnets         = ["${local.elb_subnet_ids}"]
   internal        = false
   security_groups = ["${aws_security_group.api.id}"]
 
@@ -66,7 +66,7 @@ resource "aws_elb" "api_external" {
 
 resource "aws_elb" "console" {
   name            = "${var.custom_dns_name == "" ? var.cluster_name : var.custom_dns_name}-con"
-  subnets         = ["${local.master_subnet_ids}"]
+  subnets         = ["${local.elb_subnet_ids}"]
   internal        = "${var.public_master_endpoints ? false : true}"
   security_groups = ["${aws_security_group.console.id}"]
 
