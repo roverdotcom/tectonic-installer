@@ -60,6 +60,8 @@ module "vpc" {
     join("|", keys(var.tectonic_aws_worker_custom_subnets)) :
     join("|", data.aws_availability_zones.azs.names)
   )}"
+  elb_subnet_ids          = "${var.tectonic_aws_elb_subnet_ids}"
+  elb_ingress_cidr_blocks = "${var.tectonic_aws_elb_ingress_cidr_blocks}"
 }
 
 module "etcd" {

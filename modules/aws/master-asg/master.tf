@@ -60,14 +60,17 @@ resource "aws_autoscaling_group" "masters" {
 }
 
 resource "aws_launch_configuration" "master_conf" {
-  instance_type               = "${var.ec2_type}"
-  image_id                    = "${coalesce(var.ec2_ami, data.aws_ami.coreos_ami.image_id)}"
-  name_prefix                 = "${var.cluster_name}-master-"
-  key_name                    = "${var.ssh_key}"
-  security_groups             = ["${var.master_sg_ids}"]
-  iam_instance_profile        = "${aws_iam_instance_profile.master_profile.arn}"
-  associate_public_ip_address = "${var.public_endpoints}"
-  user_data                   = "${data.ignition_config.s3.rendered}"
+  instance_type        = "${var.ec2_type}"
+  image_id             = "${coalesce(var.ec2_ami, data.aws_ami.coreos_ami.image_id)}"
+  name_prefix          = "${var.cluster_name}-master-"
+  key_name             = "${var.ssh_key}"
+  security_groups      = ["${var.master_sg_ids}"]
+  iam_instance_profile = "${aws_iam_instance_profile.master_profile.arn}"
+
+  # associate_public_ip_address = "${var.public_endpoints}"
+  associate_public_ip_address = "false"
+
+  user_data = "${data.ignition_config.s3.rendered}"
 
   lifecycle {
     create_before_destroy = true
