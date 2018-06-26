@@ -53,7 +53,7 @@ ExecStart=/bin/bash -c " \
     -v /etc/ssl/etcd:/etc/ssl/etcd:ro \
     -v /etc/dd-agent/conf.d:/conf.d:ro \
     -e API_KEY=\"${var.datadog_api_key}\" \
-    -e TAGS=\"k8s_cluster:${var.cluster_name}\" \
+    -e TAGS=\"k8s_cluster:${var.cluster_name},k8s_etcd\" \
     datadog/docker-dd-agent"
 ExecStop=/usr/bin/docker stop dd-agent
 [Install]
